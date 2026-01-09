@@ -11,4 +11,10 @@ class LinqFilter {
         Console.WriteLine("Artistas do genero " + genero + ":");
         artistasPorGeneroMusical.ForEach(a => Console.WriteLine(a));
     }
+
+    public static void FiltrarMusicasPorArtista(List<Musica> musicas, string artista) {
+        var musicasPorArtista = musicas.Where(musica => musica.Artista!.Equals(artista)).Select(m => m.Nome).OrderBy(musica => musica).ToList();
+        Console.WriteLine("Exibindo musicas do artista "+artista+":");
+        musicasPorArtista.ForEach(m => Console.WriteLine(m));
+    }
 }
