@@ -14,13 +14,12 @@ class Musica
     [JsonPropertyName("year")]
     public string? Ano { get; set; }
 
-    public void ExibirDetalhes()
+    public override string ToString()
     {
-        Console.WriteLine($"Nome: {Nome}");
-        Console.WriteLine($"Artista: {Artista}");
-        Console.WriteLine($"Duração (s): {Duracao/1000}");
-        Console.WriteLine($"Gênero musical: {Genero}");
-        Console.WriteLine($"Ano: {Ano}");
-        Console.WriteLine("---------------------------------------------");
+        return $"Nome: {Nome} \n" +
+            $"Artista: {Artista} \n" +
+            $"Duração (s): {Duracao / 1000} \n" +
+            $"Gênero musical: {Genero} \n" +
+            $"Ano: {Ano}\n";
     }
 }

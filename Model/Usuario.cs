@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 namespace ScreenSoundAPI.Model;
     internal class Usuario
@@ -28,7 +29,20 @@ namespace ScreenSoundAPI.Model;
 
     public void ExibirMusicasFavoritas() {
         Console.WriteLine("Exibindo musicas favoritas de "+Nome);
-        MusicasFavoritas.ForEach(musica => musica.ExibirDetalhes());
+        MusicasFavoritas.ForEach(musica => Console.WriteLine(musica));
+    }
+
+    public void GerarJson()
+    {
+        string json = JsonSerializer.Serialize(new
+        {
+            nome = Nome,
+            id=Id,
+            musicasFavoritas = MusicasFavoritas
+        });
+        string nomeDoArquivo = $"musicas-favoritas-{Nome}.json";
+        File.WriteAllText(nomeDoArquivo, json);
+        Console.WriteLine($"O arquivo JSON foi criado com sucesso no caminho {Path.GetFullPath(nomeDoArquivo)}");
     }
 }
 

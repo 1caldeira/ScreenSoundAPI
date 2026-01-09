@@ -31,7 +31,9 @@ using (HttpClient client = new HttpClient())
 
         Console.WriteLine("Testando params: buscando musicas de um único artista (Eminem)");
         var eminem = LinqFilter.FiltrarMusicasPorArtista(musicas, "Eminem");
-        eminem.ForEach(e => e.ExibirDetalhes());
+        eminem.ForEach(e => Console.WriteLine(e));
+
+        usuario.GerarJson();
     }
     catch (Exception ex)
     {
