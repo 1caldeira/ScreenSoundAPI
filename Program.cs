@@ -19,7 +19,9 @@ using (HttpClient client = new HttpClient())
 
         //LinqFilter.FiltrarArtistasPorGeneroMusical(musicas, "hip hop");
 
-        LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar");
+        //LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar");
+
+        LinqFilter.FiltrarMusicasPorAno(musicas, "2010");
     }
     catch (Exception ex)
     {
