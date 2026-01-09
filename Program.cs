@@ -19,9 +19,19 @@ using (HttpClient client = new HttpClient())
 
         //LinqFilter.FiltrarArtistasPorGeneroMusical(musicas, "hip hop");
 
-        //LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar");
+        List<Musica> musicasFavoritas = LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar", "Tyler, The Creator", 
+            "JAY-Z","Drake","Kanye West","Daft Punk","Michael Jackson","Linkin Park");
 
-        LinqFilter.FiltrarMusicasPorAno(musicas, "2010");
+        //LinqFilter.FiltrarMusicasPorAno(musicas, "2010");
+
+        Usuario usuario = new Usuario("Gabriel Caldeira");
+        Console.WriteLine("Adicionando musicas favoritas para o usuário "+usuario.Nome+". ID: "+usuario.Id);
+        musicasFavoritas.ForEach(musica => usuario.AdicionarMusicaFavorita(musica));
+        usuario.ExibirMusicasFavoritas();
+
+        Console.WriteLine("Testando params: buscando musicas de um único artista (Eminem)");
+        var eminem = LinqFilter.FiltrarMusicasPorArtista(musicas, "Eminem");
+        eminem.ForEach(e => e.ExibirDetalhes());
     }
     catch (Exception ex)
     {

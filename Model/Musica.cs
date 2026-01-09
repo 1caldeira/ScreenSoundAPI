@@ -21,5 +21,6 @@ class Musica
         Console.WriteLine($"Duração (s): {Duracao/1000}");
         Console.WriteLine($"Gênero musical: {Genero}");
         Console.WriteLine($"Ano: {Ano}");
+        Console.WriteLine("---------------------------------------------");
     }
 }
