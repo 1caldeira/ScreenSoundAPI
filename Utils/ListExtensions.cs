@@ -1,4 +1,5 @@
-﻿public static class ListExtensions
+﻿namespace ScreenSoundAPI.Extensions;
+public static class ListExtensions
 {
     public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
     {

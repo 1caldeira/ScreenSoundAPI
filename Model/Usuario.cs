@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using ScreenSoundAPI.Extensions;
 
 namespace ScreenSoundAPI.Model;
     internal class Usuario
