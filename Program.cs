@@ -33,7 +33,9 @@ using (HttpClient client = new HttpClient())
         var eminem = LinqFilter.FiltrarMusicasPorArtista(musicas, "Eminem");
         eminem.ForEach(e => Console.WriteLine(e));
 
-        usuario.GerarJson();
+        //usuario.GerarJson();
+        var musicasEmFa = LinqFilter.FiltrarMusicasPeloTom(musicasFavoritas, Tom.F);
+        musicasEmFa.ForEach(e => Console.WriteLine(e));
     }
     catch (Exception ex)
     {
