@@ -39,6 +39,16 @@ namespace ScreenSoundAPI.Model;
         MusicasFavoritas.ForEach(musica => Console.WriteLine(musica));
     }
 
+    public Playlist ObterPlaylistPeloNome(string nome) {
+        foreach (var playlist in Playlists)
+        {
+            if (playlist.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase)) {
+                return playlist;
+           }
+        }
+        return null;
+    }
+
     public void GerarJson()
     {
         string json = JsonSerializer.Serialize(new

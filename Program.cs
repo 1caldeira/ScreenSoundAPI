@@ -43,10 +43,36 @@ using (HttpClient client = new HttpClient())
             Console.WriteLine($" ******* Playlist: {playlist.Nome} *******");
         }
 
-        Console.WriteLine("Tocando a playlist " + usuario.Playlists[2].Nome);
+        var playlistDoUsuario = usuario.ObterPlaylistPeloNome("Rap");
 
-        usuario.Playlists[2].ForEach(musica => Console.WriteLine("Tocando musica: " + musica.Nome + " - " + musica.Artista));
+        Console.WriteLine("Tocando a playlist " + playlistDoUsuario.Nome);
 
+        playlistDoUsuario.ForEach(musica => Console.WriteLine("Tocando musica: " + musica.Nome + " - " + musica.Artista));
+
+        var buscaPeloTitulo = playlistDoUsuario.ObterPeloTitulo("Trap Queen");
+        if (buscaPeloTitulo != null)
+        {
+            Console.WriteLine($"Musica encontrada na playlist '{playlistDoUsuario.Nome}' do usuario {usuario.Nome}: {buscaPeloTitulo.Nome} - {buscaPeloTitulo.Artista}");
+        }
+        else
+        {
+            Console.WriteLine("Musica não encontrada na playlist.");
+        }
+
+        Console.WriteLine($"Tocando musica aleatoria da playlist '{playlistDoUsuario.Nome}'");
+        Console.WriteLine(playlistDoUsuario.TocarMusicaAleatoria());
+
+        Console.WriteLine("Removendo musica da playlist");
+        string musicaParaRemover = "Too Good";
+        Musica musicaRemovida = playlistDoUsuario.RemoverPeloTitulo(musicaParaRemover);
+        if (musicaRemovida != null)
+        {
+            Console.WriteLine($"Musica '{musicaParaRemover}' removida com sucesso!\n" +
+                $"Detalhes da musica removida:\n"+ musicaRemovida);
+        }
+        else {
+            Console.WriteLine($"Musica '{musicaParaRemover}' não encontrada na playlist!");
+        }
     }
     catch (Exception ex)
     {

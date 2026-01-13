@@ -19,6 +19,34 @@ namespace ScreenSoundAPI.Model
 
         public bool IsReadOnly => false;
 
+        public Musica? ObterPeloTitulo(string titulo) {
+            foreach(var musica in _musicas)
+            {
+                if(musica.Nome!.Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                {
+                    return musica;
+                }
+            }
+            return null;
+        }
+
+        public Musica RemoverPeloTitulo(string titulo) {
+            var musica = ObterPeloTitulo(titulo);
+            if(musica != null) {
+                _musicas.Remove(musica);
+                return musica;
+            }
+            return null;
+        }
+
+        public Musica TocarMusicaAleatoria() {
+            if (_musicas.Count == 0) return null;
+
+            int indiceAleatorio = Random.Shared.Next(_musicas.Count);
+
+            return _musicas[indiceAleatorio];
+        }
+
         public IEnumerator<Musica> GetEnumerator()
         {
             return _musicas.GetEnumerator();
