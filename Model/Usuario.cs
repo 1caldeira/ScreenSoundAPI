@@ -12,6 +12,12 @@ namespace ScreenSoundAPI.Model;
     public string Nome { get; set; }
     private List<Musica> _musicasFavoritas = new List<Musica>();
     public IReadOnlyList<Musica> MusicasFavoritas => _musicasFavoritas.AsReadOnly();
+    private List<Playlist> _playlists = new List<Playlist>();
+    public IReadOnlyList<Playlist> Playlists => _playlists.AsReadOnly();
+
+    public void AdicionarPlaylist(Playlist playlist) {
+        _playlists.Add(playlist);
+    }
 
     public Usuario(string nome)
     {

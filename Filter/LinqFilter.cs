@@ -1,15 +1,14 @@
 ﻿using ScreenSoundAPI.Model;
 
 class LinqFilter {
-    public static void FiltrarTodosOsGenerosMusicais(List<Musica> musicas) {
+    public static List<string> FiltrarTodosOsGenerosMusicais(List<Musica> musicas) {
         List<string> todosOsGenerosMusicais = musicas.Select(musica => musica.Genero.Split(',','/')[0]).Distinct().ToList();
-        todosOsGenerosMusicais.ForEach(g => Console.WriteLine(g));
+        return todosOsGenerosMusicais;
     }
 
-    public static void FiltrarArtistasPorGeneroMusical(List<Musica> musicas, string genero) { 
+    public static List<string> FiltrarArtistasPorGeneroMusical(List<Musica> musicas, string genero) { 
         var artistasPorGeneroMusical = musicas.Where(musica => musica.Genero!.Contains(genero)).Select(musica => musica.Artista).Distinct().OrderBy(a => a).ToList();
-        Console.WriteLine("Artistas do genero " + genero + ":");
-        artistasPorGeneroMusical.ForEach(a => Console.WriteLine(a));
+        return artistasPorGeneroMusical;
     }
 
     public static List<Musica> FiltrarMusicasPorArtista(List<Musica> musicas, params string[] artistas)
@@ -21,15 +20,20 @@ class LinqFilter {
         return musicasFiltradas;
     }
 
-    public static void FiltrarMusicasPorAno(List<Musica> musicas, string ano) {
+    public static List<Musica> FiltrarMusicasPorAno(List<Musica> musicas, string ano) {
         var musicasPorAno = musicas.Where(musica => musica.Ano!.Equals(ano)).OrderBy(musica => musica.Nome).ToList();
-        Console.WriteLine("Mostrando musicas do ano "+ano);
-        musicasPorAno.ForEach(m => Console.WriteLine(m.Nome + " - " + m.Artista));
+        return musicasPorAno;
     }
 
     public static List<Musica> FiltrarMusicasPeloTom(List<Musica> musicas, Tom tom) {
         var musicasPorTom = musicas.Where(musica => musica.Tonalidade.Equals(tom)).ToList();
         Console.WriteLine("Filtrando musicas pelo tom "+tom);
         return musicasPorTom;
+    }
+
+    public static List<Musica> FiltrarMusicasPeloGenero(List<Musica> musicas, string genero)
+    {
+        var musicasPorGenero = musicas.Where(musica => musica.Genero!.Contains(genero,StringComparison.OrdinalIgnoreCase)).ToList();
+        return musicasPorGenero;
     }
 }
