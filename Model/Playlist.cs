@@ -1,7 +1,6 @@
 ﻿/// <summary>
 /// Representa uma playlist de músicas.
-/// Implementa IEnumerable para permitir iteração e uso de LINQ,
-/// mas mantém a lista interna encapsulada para garantir a integridade dos dados.
+/// Implementa ICollection para fins de estudo
 /// </summary>
 
 using System;
@@ -11,13 +10,26 @@ using System.Text;
 
 namespace ScreenSoundAPI.Model
 {
-    class Playlist : IEnumerable<Musica>
+    class Playlist : ICollection<Musica>
     {
         public string Nome { get; set; }
         private List<Musica> _musicas = [];
-        public IReadOnlyList<Musica> Musicas => _musicas.AsReadOnly();
 
-        public void AdicionarMusica(Musica musica)
+        public int Count => _musicas.Count;
+
+        public bool IsReadOnly => false;
+
+        public IEnumerator<Musica> GetEnumerator()
+        {
+            return _musicas.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Add(Musica musica)
         {
             if (musica == null)
             {
@@ -26,14 +38,24 @@ namespace ScreenSoundAPI.Model
             _musicas.Add(musica);
         }
 
-        public IEnumerator<Musica> GetEnumerator()
+        public void Clear()
         {
-            return Musicas.GetEnumerator();
+            _musicas.Clear();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public bool Contains(Musica item)
         {
-            return GetEnumerator();
+            return _musicas.Contains(item);
+        }
+
+        public void CopyTo(Musica[] array, int arrayIndex)
+        {
+            _musicas.CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(Musica item)
+        {
+            return _musicas.Remove(item);
         }
     }
 }
