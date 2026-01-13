@@ -18,6 +18,17 @@ namespace ScreenSoundAPI.Model;
     public void AdicionarPlaylist(Playlist playlist) {
         _playlists.Add(playlist);
     }
+    public Playlist ObterPlaylistPeloNome(string nome)
+    {
+        foreach (var playlist in Playlists)
+        {
+            if (playlist.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
+            {
+                return playlist;
+            }
+        }
+        return null;
+    }
 
     public Usuario(string nome)
     {
