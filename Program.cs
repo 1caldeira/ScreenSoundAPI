@@ -92,8 +92,15 @@ using (HttpClient client = new HttpClient())
             Console.WriteLine("TOCANDO MUSICA: " + player.ProximaDaFila());
         }
         
-        player.ExibirFila();
-    }
+
+        Console.WriteLine("\nExibindo as ultimas 5 musicas tocadas: ");
+        foreach (var musica in player.Historico().Take(5))
+        {
+            Console.WriteLine($"\t - {musica.Nome} - {musica.Artista}");
+        }
+        Console.WriteLine("\nTocando a musica anterior: ");
+        Console.WriteLine(player.TocarMusicaAnterior());
+
     catch (Exception ex)
     {
         Console.WriteLine($"Ocorreu um erro: {ex.Message}");

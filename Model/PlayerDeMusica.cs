@@ -9,6 +9,7 @@ namespace ScreenSoundAPI.Model
     class PlayerDeMusica
     {
         private Queue<Musica> fila = [];
+        private Stack<Musica> pilha = [];
         public bool TemMusica => fila.Count > 0;
         public void AdicionarNaFila(Musica musica)
         {
@@ -38,7 +39,21 @@ namespace ScreenSoundAPI.Model
 
         public Musica? ProximaDaFila() {
             if (fila.Count == 0) return null;
-            return fila.Dequeue();
+            var musica = fila.Dequeue();
+            pilha.Push(musica);
+            return musica;
+        }
+
+        public IEnumerable<Musica> Historico() {
+            foreach (Musica musica in pilha)
+            {
+                yield return musica;
+            }
+        }
+
+        public Musica? TocarMusicaAnterior() { 
+            if(pilha.Count == 0) return null;
+            return pilha.Pop();
         }
     }
 }
