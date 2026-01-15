@@ -17,11 +17,18 @@ namespace ScreenSoundAPI.Model
         private List<Musica> _musicas = [];
         public IReadOnlyList<Musica> Musicas => _musicas.AsReadOnly();
 
+        public IReadOnlyList<Musica> ordenarPorDuracao() => Musicas.OrderBy(musica => musica.Duracao).ToList();
+
         public void AdicionarMusica(Musica musica)
         {
             if (musica == null)
             {
                 throw new ArgumentNullException(nameof(musica), "A música não pode ser nula.");
+            }
+            if (_musicas.Contains(musica))
+            {
+                Console.WriteLine("A musica ja está na playlist!");
+                return;
             }
             _musicas.Add(musica);
         }
@@ -58,10 +65,7 @@ namespace ScreenSoundAPI.Model
             return _musicas[indiceAleatorio];
         }
 
-        public IEnumerator<Musica> GetEnumerator()
-        {
-            return Musicas.GetEnumerator();
-        }
+        public IEnumerator<Musica> GetEnumerator() => Musicas.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
         {

@@ -76,6 +76,9 @@ using (HttpClient client = new HttpClient())
             Console.WriteLine($"Musica '{musicaParaRemover}' não encontrada na playlist!");
         }
 
+        var musicasMaisTocadas = LinqFilter.AsMaisTocadas(usuario.Playlists);
+        Console.WriteLine("----------------AS MAIS TOCADAS----------------");
+        musicasMaisTocadas.ForEach(mais => Console.WriteLine(mais));
 
     }
     catch (Exception ex)

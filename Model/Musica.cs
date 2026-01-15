@@ -47,4 +47,16 @@ public class Musica
             $"Ano: {Ano}\n";
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Musica outra) return false;
+
+        return Nome.Equals(outra.Nome, StringComparison.OrdinalIgnoreCase) &&
+               Artista.Equals(outra.Artista, StringComparison.OrdinalIgnoreCase);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Nome, Artista);
+    }
 }
