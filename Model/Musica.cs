@@ -27,13 +27,15 @@ public class Musica
     [JsonPropertyName("artist")]
     public string? Artista { get; set; }
     [JsonPropertyName("duration_ms")]
-    public int Duracao { get; set; }
+    public int DuracaoMs { get; set; }
     [JsonPropertyName("genre")]
     public string? Genero { get; set; }
     [JsonPropertyName("year")]
     public string? Ano { get; set; }
     [JsonPropertyName("key")]
     public int KeyInt { get; set; }
+
+    public int Duracao => DuracaoMs / 1000;
 
     public Tom Tonalidade { get => (Tom)KeyInt;}
 
@@ -42,7 +44,7 @@ public class Musica
         return $"Nome: {Nome} \n" +
             $"Artista: {Artista} \n" +
             $"Tom: {Tonalidade.GetDescription()} \n" +
-            $"Duração (s): {Duracao / 1000} \n" +
+            $"Duração (s): {Duracao} \n" +
             $"Gênero musical: {Genero} \n" +
             $"Ano: {Ano}\n";
     }

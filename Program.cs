@@ -10,15 +10,15 @@ using (HttpClient client = new HttpClient())
         string resposta = await client.GetStringAsync("https://guilhermeonrails.github.io/api-csharp-songs/songs.json");
         var musicas = JsonSerializer.Deserialize<List<Musica>>(resposta)!;
 
-        List<Musica> musicasFavoritas = LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar", "Tyler, The Creator", 
-            "JAY-Z","Drake","Kanye West","Daft Punk","Michael Jackson","Linkin Park");
+        List<Musica> musicasFavoritas = LinqFilter.FiltrarMusicasPorArtista(musicas, "Kendrick Lamar", "Tyler, The Creator",
+            "JAY-Z", "Drake", "Kanye West", "Daft Punk", "Michael Jackson", "Linkin Park");
 
         var musicas2010 = LinqFilter.FiltrarMusicasPorAno(musicas, "2010");
 
         Usuario usuario = new Usuario("Gabriel Caldeira");
-        Console.WriteLine("Adicionando musicas favoritas para o usuário "+usuario.Nome+". ID: "+usuario.Id);
+        Console.WriteLine("Adicionando musicas favoritas para o usuário " + usuario.Nome + ". ID: " + usuario.Id);
 
-        musicasFavoritas.ForEach(m => usuario.AdicionarMusicaFavorita(m)); 
+        musicasFavoritas.ForEach(m => usuario.AdicionarMusicaFavorita(m));
         var eminem = LinqFilter.FiltrarMusicasPorArtista(musicas, "Eminem");
 
         var musicasDeHipHop = LinqFilter.FiltrarMusicasPeloGenero(musicas, "Hip Hop");
@@ -37,7 +37,7 @@ using (HttpClient client = new HttpClient())
         usuario.AdicionarPlaylist(playlistRap);
         Console.WriteLine(musicasDeHipHop.Count);
 
-        Console.WriteLine("Exibindo playlists do usuario "+usuario.Nome+"\n");
+        Console.WriteLine("Exibindo playlists do usuario " + usuario.Nome + "\n");
         foreach (var playlist in usuario.Playlists)
         {
             Console.WriteLine($" ******* Playlist: {playlist.Nome} *******");
@@ -91,7 +91,7 @@ using (HttpClient client = new HttpClient())
         {
             Console.WriteLine("TOCANDO MUSICA: " + player.ProximaDaFila());
         }
-        
+
 
         Console.WriteLine("\nExibindo as ultimas 5 musicas tocadas: ");
         foreach (var musica in player.Historico().Take(5))
@@ -101,6 +101,9 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("\nTocando a musica anterior: ");
         Console.WriteLine(player.TocarMusicaAnterior());
 
+        Console.WriteLine("Duracao total playlist de musicas favoritas: " + playlistFavoritos.DuracaoTotal);
+        Console.WriteLine("Media de duracao das musicas: "+ playlistFavoritos.MediaDuracaoMusicas);
+    }
     catch (Exception ex)
     {
         Console.WriteLine($"Ocorreu um erro: {ex.Message}");

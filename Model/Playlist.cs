@@ -4,6 +4,7 @@
 /// mas mantém a lista interna encapsulada para garantir a integridade dos dados.
 /// </summary>
 
+using ScreenSoundAPI.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,23 @@ namespace ScreenSoundAPI.Model
         public IReadOnlyList<Musica> Musicas => _musicas.AsReadOnly();
 
         public IReadOnlyList<Musica> ordenarPorDuracao() => Musicas.OrderBy(musica => musica.Duracao).ToList();
+
+        public string DuracaoTotal
+        {
+            get
+            {
+                var tempoTotal = Musicas.Sum(m => m.Duracao);
+                return $"{tempoTotal / 60} min {tempoTotal % 60} s";
+            }
+        }
+
+        public string MediaDuracaoMusicas
+        {
+            get {
+                var tempoMedio = (Musicas.Sum(m => m.Duracao)) / Musicas.Count();
+                return $"{tempoMedio / 60} min {tempoMedio % 60} s";
+            }
+        }
 
         public void AdicionarMusica(Musica musica)
         {

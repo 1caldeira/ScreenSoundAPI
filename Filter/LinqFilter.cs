@@ -10,7 +10,7 @@ class LinqFilter
 
     public static List<string> FiltrarArtistasPorGeneroMusical(List<Musica> musicas, string genero)
     {
-        var artistasPorGeneroMusical = musicas.Where(musica => musica.Genero!.Contains(genero)).Select(musica => musica.Artista).Distinct().OrderBy(a => a).ToList();
+        var artistasPorGeneroMusical = musicas.Where(musica => musica.Genero!.Contains(genero, StringComparison.OrdinalIgnoreCase)).Select(musica => musica.Artista).Distinct().OrderBy(a => a).ToList();
         return artistasPorGeneroMusical;
     }
 
@@ -32,7 +32,6 @@ class LinqFilter
     public static List<Musica> FiltrarMusicasPeloTom(List<Musica> musicas, Tom tom)
     {
         var musicasPorTom = musicas.Where(musica => musica.Tonalidade.Equals(tom)).ToList();
-        Console.WriteLine("Filtrando musicas pelo tom " + tom);
         return musicasPorTom;
     }
 
