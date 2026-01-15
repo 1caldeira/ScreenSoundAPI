@@ -80,6 +80,19 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("----------------AS MAIS TOCADAS----------------");
         musicasMaisTocadas.ForEach(mais => Console.WriteLine(mais));
 
+
+        Console.WriteLine("Tocando musicas");
+        var player = new PlayerDeMusica();
+        player.AdicionarNaFila(playlist2010);
+        player.AdicionarNaFila(playlistFavoritos);
+        player.ExibirFila();
+
+        while (player.TemMusica)
+        {
+            Console.WriteLine("TOCANDO MUSICA: " + player.ProximaDaFila());
+        }
+        
+        player.ExibirFila();
     }
     catch (Exception ex)
     {
