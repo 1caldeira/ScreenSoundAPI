@@ -56,4 +56,20 @@ class LinqFilter
         .Take(10)                        
         .ToList();
     }
+
+    public static List<KeyValuePair<string, int>> ArtistasMaisPopulares(IReadOnlyList<Playlist> playlists)
+    {
+        Dictionary<string, int> ranking = [];
+        foreach (var playlist in playlists)
+        {
+            foreach (var musica in playlist)
+            {
+                ranking[musica.Artista!] = ranking!.GetValueOrDefault(musica.Artista) + 1;
+            }
+        }
+        return ranking
+       .OrderByDescending(x => x.Value)
+       .Take(10)
+       .ToList();
+    }
 }

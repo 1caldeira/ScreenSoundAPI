@@ -81,28 +81,33 @@ using (HttpClient client = new HttpClient())
         musicasMaisTocadas.ForEach(mais => Console.WriteLine(mais));
 
 
-        Console.WriteLine("Tocando musicas");
-        var player = new PlayerDeMusica();
-        player.AdicionarNaFila(playlist2010);
-        player.AdicionarNaFila(playlistFavoritos);
-        player.ExibirFila();
+        //Console.WriteLine("Tocando musicas");
+        //var player = new PlayerDeMusica();
+        //player.AdicionarNaFila(playlist2010);
+        //player.AdicionarNaFila(playlistFavoritos);
+        //player.ExibirFila();
 
-        while (player.TemMusica)
-        {
-            Console.WriteLine("TOCANDO MUSICA: " + player.ProximaDaFila());
-        }
+        //while (player.TemMusica)
+        //{
+        //    Console.WriteLine("TOCANDO MUSICA: " + player.ProximaDaFila());
+        //}
 
 
-        Console.WriteLine("\nExibindo as ultimas 5 musicas tocadas: ");
-        foreach (var musica in player.Historico().Take(5))
-        {
-            Console.WriteLine($"\t - {musica.Nome} - {musica.Artista}");
-        }
-        Console.WriteLine("\nTocando a musica anterior: ");
-        Console.WriteLine(player.TocarMusicaAnterior());
+        //Console.WriteLine("\nExibindo as ultimas 5 musicas tocadas: ");
+        //foreach (var musica in player.Historico().Take(5))
+        //{
+        //    Console.WriteLine($"\t - {musica.Nome} - {musica.Artista}");
+        //}
+        //Console.WriteLine("\nTocando a musica anterior: ");
+        //Console.WriteLine(player.TocarMusicaAnterior());
 
         Console.WriteLine("Duracao total playlist de musicas favoritas: " + playlistFavoritos.DuracaoTotal);
         Console.WriteLine("Media de duracao das musicas: "+ playlistFavoritos.MediaDuracaoMusicas);
+
+        Console.WriteLine("------------ARTISTAS MAIS POPULARES------------");
+        var artistasMaisPopulares = LinqFilter.ArtistasMaisPopulares(usuario.Playlists);
+
+        artistasMaisPopulares.ForEach(a => Console.WriteLine(a));
     }
     catch (Exception ex)
     {
