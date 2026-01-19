@@ -72,4 +72,22 @@ class LinqFilter
        .Take(10)
        .ToList();
     }
+
+    public static Dictionary<string, List<Musica>> ArtistasComMusicasLongas(IReadOnlyList<Playlist> playlists)
+    {
+        Dictionary<string, List<Musica>> artistasComMusicasMaioresQueCincoMinutos = [];
+        foreach (var playlist in playlists)
+        {
+            foreach (var musica in playlist)
+            {
+                if (musica.Duracao >= 300) { //maior que 5minutos
+                    if(!artistasComMusicasMaioresQueCincoMinutos.ContainsKey(musica.Artista!)) {
+                        artistasComMusicasMaioresQueCincoMinutos[musica.Artista!] = new List<Musica>();
+                    }
+                    artistasComMusicasMaioresQueCincoMinutos[musica.Artista!].Add(musica);
+                } 
+            }
+        }
+        return artistasComMusicasMaioresQueCincoMinutos;
+    }
 }

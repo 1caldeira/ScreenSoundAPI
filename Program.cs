@@ -108,6 +108,16 @@ using (HttpClient client = new HttpClient())
         var artistasMaisPopulares = LinqFilter.ArtistasMaisPopulares(usuario.Playlists);
 
         artistasMaisPopulares.ForEach(a => Console.WriteLine(a));
+        
+        var artistasComMusicasLongas = LinqFilter.ArtistasComMusicasLongas(usuario.Playlists);
+
+        foreach (var item in artistasComMusicasLongas.Keys)
+        {
+            foreach (var value in artistasComMusicasLongas[item]) {  
+                Console.WriteLine($"{item} - {value.Nome} - {value.Duracao}s"); 
+            }
+
+        }
     }
     catch (Exception ex)
     {
