@@ -15,7 +15,7 @@ using (HttpClient client = new HttpClient())
 
         var musicas2010 = LinqFilter.FiltrarMusicasPorAno(musicas, "2010");
 
-        Usuario usuario = new Usuario("Gabriel Caldeira");
+        Usuario usuario = new Usuario("Gabriel Caldeira","Senhaforte123@");
         Console.WriteLine("Adicionando musicas favoritas para o usuário " + usuario.Nome + ". ID: " + usuario.Id);
 
         musicasFavoritas.ForEach(m => usuario.AdicionarMusicaFavorita(m));
@@ -35,50 +35,49 @@ using (HttpClient client = new HttpClient())
         Playlist playlistRap = new Playlist() { Nome = "Rap" };
         musicasDeHipHop.ForEach(musica => playlistRap.AdicionarMusica(musica));
         usuario.AdicionarPlaylist(playlistRap);
-        Console.WriteLine(musicasDeHipHop.Count);
 
-        Console.WriteLine("Exibindo playlists do usuario " + usuario.Nome + "\n");
-        foreach (var playlist in usuario.Playlists)
-        {
-            Console.WriteLine($" ******* Playlist: {playlist.Nome} *******");
-        }
+        //Console.WriteLine("Exibindo playlists do usuario " + usuario.Nome + "\n");
+        //foreach (var playlist in usuario.Playlists)
+        //{
+        //    Console.WriteLine($" ******* Playlist: {playlist.Nome} *******");
+        //}
 
-        var playlistDoUsuario = usuario.ObterPlaylistPeloNome("Rap");
+        //var playlistDoUsuario = usuario.ObterPlaylistPeloNome("Rap");
 
 
-        Console.WriteLine("Tocando a playlist " + playlistDoUsuario.Nome);
+        //Console.WriteLine("Tocando a playlist " + playlistDoUsuario.Nome);
 
-        playlistDoUsuario.ForEach(musica => Console.WriteLine("Tocando musica: " + musica.Nome + " - " + musica.Artista));
+        //playlistDoUsuario.ForEach(musica => Console.WriteLine("Tocando musica: " + musica.Nome + " - " + musica.Artista));
 
-        var buscaPeloTitulo = playlistDoUsuario.ObterPeloTitulo("Trap Queen");
-        if (buscaPeloTitulo != null)
-        {
-            Console.WriteLine($"Musica encontrada na playlist '{playlistDoUsuario.Nome}' do usuario {usuario.Nome}: {buscaPeloTitulo.Nome} - {buscaPeloTitulo.Artista}");
-        }
-        else
-        {
-            Console.WriteLine("Musica não encontrada na playlist.");
-        }
+        //var buscaPeloTitulo = playlistDoUsuario.ObterPeloTitulo("Trap Queen");
+        //if (buscaPeloTitulo != null)
+        //{
+        //    Console.WriteLine($"Musica encontrada na playlist '{playlistDoUsuario.Nome}' do usuario {usuario.Nome}: {buscaPeloTitulo.Nome} - {buscaPeloTitulo.Artista}");
+        //}
+        //else
+        //{
+        //    Console.WriteLine("Musica não encontrada na playlist.");
+        //}
 
-        Console.WriteLine($"Tocando musica aleatoria da playlist '{playlistDoUsuario.Nome}'");
-        Console.WriteLine(playlistDoUsuario.TocarMusicaAleatoria());
+        //Console.WriteLine($"Tocando musica aleatoria da playlist '{playlistDoUsuario.Nome}'");
+        //Console.WriteLine(playlistDoUsuario.TocarMusicaAleatoria());
 
-        Console.WriteLine("Removendo musica da playlist");
-        string musicaParaRemover = "Too Good";
-        Musica musicaRemovida = playlistDoUsuario.RemoverPeloTitulo(musicaParaRemover);
-        if (musicaRemovida != null)
-        {
-            Console.WriteLine($"Musica '{musicaParaRemover}' removida com sucesso!\n" +
-                $"Detalhes da musica removida:\n" + musicaRemovida);
-        }
-        else
-        {
-            Console.WriteLine($"Musica '{musicaParaRemover}' não encontrada na playlist!");
-        }
+        //Console.WriteLine("Removendo musica da playlist");
+        //string musicaParaRemover = "Too Good";
+        //Musica musicaRemovida = playlistDoUsuario.RemoverPeloTitulo(musicaParaRemover);
+        //if (musicaRemovida != null)
+        //{
+        //    Console.WriteLine($"Musica '{musicaParaRemover}' removida com sucesso!\n" +
+        //        $"Detalhes da musica removida:\n" + musicaRemovida);
+        //}
+        //else
+        //{
+        //    Console.WriteLine($"Musica '{musicaParaRemover}' não encontrada na playlist!");
+        //}
 
-        var musicasMaisTocadas = LinqFilter.AsMaisTocadas(usuario.Playlists);
-        Console.WriteLine("----------------AS MAIS TOCADAS----------------");
-        musicasMaisTocadas.ForEach(mais => Console.WriteLine(mais));
+        //var musicasMaisTocadas = LinqFilter.AsMaisTocadas(usuario.Playlists);
+        //Console.WriteLine("----------------AS MAIS TOCADAS----------------");
+        //musicasMaisTocadas.ForEach(mais => Console.WriteLine(mais));
 
 
         //Console.WriteLine("Tocando musicas");
@@ -101,23 +100,23 @@ using (HttpClient client = new HttpClient())
         //Console.WriteLine("\nTocando a musica anterior: ");
         //Console.WriteLine(player.TocarMusicaAnterior());
 
-        Console.WriteLine("Duracao total playlist de musicas favoritas: " + playlistFavoritos.DuracaoTotal);
-        Console.WriteLine("Media de duracao das musicas: "+ playlistFavoritos.MediaDuracaoMusicas);
+        //Console.WriteLine("Duracao total playlist de musicas favoritas: " + playlistFavoritos.DuracaoTotal);
+        //Console.WriteLine("Media de duracao das musicas: "+ playlistFavoritos.MediaDuracaoMusicas);
 
-        Console.WriteLine("------------ARTISTAS MAIS POPULARES------------");
-        var artistasMaisPopulares = LinqFilter.ArtistasMaisPopulares(usuario.Playlists);
+        //Console.WriteLine("------------ARTISTAS MAIS POPULARES------------");
+        //var artistasMaisPopulares = LinqFilter.ArtistasMaisPopulares(usuario.Playlists);
 
-        artistasMaisPopulares.ForEach(a => Console.WriteLine(a));
+        //artistasMaisPopulares.ForEach(a => Console.WriteLine(a));
         
-        var artistasComMusicasLongas = LinqFilter.ArtistasComMusicasLongas(usuario.Playlists);
+        //var artistasComMusicasLongas = LinqFilter.ArtistasComMusicasLongas(usuario.Playlists);
 
-        foreach (var item in artistasComMusicasLongas.Keys)
-        {
-            foreach (var value in artistasComMusicasLongas[item]) {  
-                Console.WriteLine($"{item} - {value.Nome} - {value.Duracao}s"); 
-            }
+        //foreach (var item in artistasComMusicasLongas.Keys)
+        //{
+        //    foreach (var value in artistasComMusicasLongas[item]) {  
+        //        Console.WriteLine($"{item} - {value.Nome} - {value.Duracao}s"); 
+        //    }
 
-        }
+        //}
     }
     catch (Exception ex)
     {

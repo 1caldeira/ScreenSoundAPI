@@ -10,6 +10,7 @@ namespace ScreenSoundAPI.Model;
     {
     public int Id { get;}
     public string Nome { get; set; }
+    private string Senha { get; set; }
     private List<Musica> _musicasFavoritas = new List<Musica>();
     public IReadOnlyList<Musica> MusicasFavoritas => _musicasFavoritas.AsReadOnly();
     private List<Playlist> _playlists = new List<Playlist>();
@@ -30,10 +31,27 @@ namespace ScreenSoundAPI.Model;
         return null;
     }
 
-    public Usuario(string nome)
+    public Usuario(string nome, string senha)
     {
         Id = GerarId();
         Nome = nome;
+        Senha = ValidarSenha(senha);
+    }
+
+    private string ValidarSenha(string senha)
+    {
+        var totalCaracteres = senha.Length;
+        var totalLetrasMaiusculas = senha.Count(c => char.IsUpper(c));
+        var totalLetrasMinusculas = senha.Count(c => char.IsLower(c));
+        var totalNumeros = senha.Count(c => char.IsDigit(c));
+        var totalSimbolos = senha.Count(c => !char.IsLetterOrDigit(c));
+        if (totalCaracteres >= 8 && totalLetrasMaiusculas > 0 && totalLetrasMinusculas > 0 && totalNumeros > 0 && totalSimbolos > 0)
+        {
+            return senha;
+        }
+        else {
+            throw new ArgumentException("A senha deve conter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos.");
+        }
     }
 
     private int GerarId()
